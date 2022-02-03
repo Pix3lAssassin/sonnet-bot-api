@@ -136,7 +136,7 @@ exports.generateSonnet = (seed = Math.random().toString(16).slice(2)) => {
   const seedFn = xmur3(seed);
   const rand = sfc32(seedFn(), seedFn(), seedFn(), seedFn());
 
-  let sonnet = [];
+  const sonnetLines = [];
   for (let i = 0; i < 12; i += 1) {
     let line;
     if (i % 2) {
@@ -144,9 +144,10 @@ exports.generateSonnet = (seed = Math.random().toString(16).slice(2)) => {
     } else {
       line = generateLine(rand);
     }
-    sonnet.push(line);
+    sonnetLines.push(line);
   }
-  sonnet = sonnet.join('\n');
+
+  const sonnet = sonnetLines.join('\n');
 
   return { seed, sonnet };
 };

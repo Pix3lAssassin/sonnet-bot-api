@@ -12,13 +12,23 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 app.get('/sonnet', (req, res) => {
-  const sonnetObj = generator.generateSonnet();
-  res.status(200).send(sonnetObj);
+  try {
+    const sonnetObj = generator.generateSonnet();
+    res.status(200).send(sonnetObj);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
 });
 
 app.get('/sonnet/:id', (req, res) => {
-  const sonnetObj = generator.generateSonnet(req.params.id);
-  res.status(200).send(sonnetObj);
+  try {
+    const sonnetObj = generator.generateSonnet(req.params.id);
+    res.status(200).send(sonnetObj);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
 });
 
 const port = 8080;
